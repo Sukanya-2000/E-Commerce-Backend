@@ -1,0 +1,135 @@
+<!-- HERO SECTION -->
+<section class="hero py-16">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="w-1/2">
+            <h6 class="text-lg"><em>Time to do some shopping !</em></h6>
+            <h1 class="text-3xl md:text-5xl font-bold"> Everything is just few clicks away !!</h1>
+            <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary"><a href="/cart">Order Now
+                </a></button>
+        </div>
+        <div class="w-1/2 px-50">
+            <img src="/image/heroImage.jpg" alt="main">
+        </div>
+    </div>
+</section>
+
+<!-- MENU SECTION -->
+<div class="container_menu">
+    <div class="menu flex items-center " id="menu">
+        <section class="menu container mx-auto py-8 ml-20 md:ml-50 lg:ml-60">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold">View All Products</h1>
+                <div class="flex items-center">
+                    <form action="/" method="GET" id="filterSortForm">
+                        <label for="filterBy">Filter by:</label>
+                        <input type="text" name="filterBy" id="filterBy">
+                        
+                        <label for="sortBy">Sort by:</label>
+                        <select name="sortBy" id="sortBy">
+                            <option value="price">Price</option>
+                            <option value="name">Name</option>
+                        </select>
+                        
+                        <label for="sortOrder">Sort order:</label>
+                        <select name="sortOrder" id="sortOrder">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                        
+                        <button type="submit">Apply Filters</button>
+                    </form>
+                </div>
+            </div>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 col-gap-12 row-gap-16">
+                <!-- Card -->
+                <!-- Add food items manually -->
+                <%
+                const groceries = [
+                    {
+                        name: "Fresh Apples",
+                        image: "https://example.com/apple.jpg",
+                        price: "100",
+                        description: "Crisp and delicious apples."
+                    },
+                    {
+                        name: "Organic Spinach",
+                        image: "https://example.com/spinach.jpg",
+                        price: "50",
+                        description: "Nutritious and green spinach leaves."
+                    },
+                    {
+                        name: "Bananas",
+                        image: "https://example.com/bananas.jpg",
+                        price: "80",
+                        description: "Sweet and ripe bananas."
+                    },
+                    {
+                        name: "Whole Wheat Bread",
+                        image: "https://example.com/bread.jpg",
+                        price: "120",
+                        description: "Healthy whole wheat bread slices."
+                    },
+                    {
+                        name: "Milk",
+                        image: "https://example.com/milk.jpg",
+                        price: "60",
+                        description: "Fresh and creamy milk."
+                    },
+                    // Add more food items here
+                ];
+                const pageSize = 5;
+                const currentPage = 1; // Change this to the current page number
+                const startIndex = (currentPage - 1) * pageSize;
+                const endIndex = currentPage * pageSize;
+                const paginatedGroceries = groceries.slice(startIndex, endIndex);
+                %>
+                <% paginatedGroceries.forEach(function(food) { %>
+                    <div class="w-full md:w-70 mb-8 box">
+                        <img class="h-45 mb-4 mx-auto" src="<%= food.image %>" alt="">
+                        <div class="text-center">
+                            <h2 class="mb-1 text-lg">
+                                <%= food.name %>
+                            </h2>
+                            <span class="size py-1 px-4 rounded-full uppercase text-xs">
+                                <%= food.description %>
+                            </span>
+                            <div class="flex items-center justify-around mt-5">
+                                <span class="font-bold text-lg">
+                                    ₹<%= food.price%>
+                                </span>
+                                <button data-food="<%= JSON.stringify(food) %>"
+                                    class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                                    <span>+</span>
+                                    <span class="ml-4">Add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                <!-- Card End -->
+            </div>
+            <!-- Pagination -->
+            <div class="flex justify-between mt-8">
+                <button class="bg-blue-700 text-white font-bold py-2 px-4 rounded-l">
+                    Previous
+                </button>
+                <button class="bg-blue-700 text-white font-bold py-2 px-4 rounded-r">
+                    Next
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- JavaScript code to submit form when options change -->
+<script>
+    document.getElementById('sortBy').addEventListener('change', function() {
+        document.getElementById('filterSortForm').submit();
+    });
+    document.getElementById('sortOrder').addEventListener('change', function() {
+        document.getElementById('filterSortForm').submit();
+    });
+    document.getElementById('filterBy').addEventListener('input', function() {
+        document.getElementById('filterSortForm').submit();
+    });
+</script>
