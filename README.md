@@ -56,7 +56,7 @@ https://youtu.be/sfHIAHTDTBA?si=Ga1e2-YVqhhbPfcA
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/your_repo.git
+   https://github.com/Sukanya-2000/E-Commerce-Backend.git
    ```
 
 2. Install dependencies:
